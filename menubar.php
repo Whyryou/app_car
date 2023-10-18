@@ -60,7 +60,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
               </a>
             </li>
             <li class="list">
-              <a href="#" class="nav-link">
+              <a href="cars.php" class="nav-link">
               <i class="bx bx-car icon"></i>
                 <span class="link">รถ</span>
               </a>
