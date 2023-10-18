@@ -8,9 +8,11 @@
     <title>รายละเอียดรถ</title>
     <style>
         .book-details{
-            background-color:#f5f5f5;
+            background-color:#fff;
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="css/style_menuber.css">
+
 </head>
 <body>
     <div class="container my-4">
@@ -29,19 +31,19 @@
                 $result = mysqli_query($conn, $sql);
                 while ($row = mysqli_fetch_array($result)) {
                  ?>
-                 <h3>brand:</h3>
+                 <h3>ยี่ห้อรถ:</h3>
                  <p><?php echo $row["brand"]; ?></p>
-                 <h3>modelcar:</h3>
+                 <h3>รุ่นรถ:</h3>
                  <p><?php echo $row["modelcar"]; ?></p>
-                 <h3>registercar:</h3>
+                 <h3>ทะเบียนรถ:</h3>
                  <p><?php echo $row["registercar"]; ?></p>
-                 <h3>typecar:</h3>
+                 <h3>ประเภทรถ:</h3>
                  <p><?php echo $row["typecar"]; ?></p>
-                 <h3>colorcar:</h3>
+                 <h3>สีรถ:</h3>
                  <p><?php echo $row["colorcar"]; ?></p>
-                 <h3>capacity:</h3>
+                 <h3>ความจุ(คน):</h3>
                  <p><?php echo $row["capacity"]; ?></p>
-                 <h3>price:</h3>
+                 <h3>ราคาเช่าต่อวัน(บาท):</h3>
                  <p><?php echo $row["price"]; ?></p>
                 
                  <?php

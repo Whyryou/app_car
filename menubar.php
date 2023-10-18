@@ -1,10 +1,3 @@
-<?php 
-session_start();
-
-if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
-
- ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +18,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
 
 
 <body>
-     <?php echo $_SESSION['name']; ?>
-     <a href="logout.php">Logout</a>
+    
      <nav>
       <div class="logo">
         <i class="bx bx-menu menu-icon"></i>
@@ -126,9 +118,3 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
 
 
 
-<?php 
-}else{
-     header("Location: index.php");
-     exit();
-}
- ?>

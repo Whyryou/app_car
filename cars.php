@@ -9,12 +9,14 @@
     <style>
         table  td, table th{
         vertical-align:middle;
-        text-align:right;
+        text-align:center;
         padding:20px!important;
         }
     </style>
+    
 </head>
 <body>
+
     <div class="container my-4">
         <header class="d-flex justify-content-between my-4">
             <h1>ข้อมูลรถ</h1>
@@ -100,3 +102,4 @@
     </div>
 </body>
 </html>
+<?php include "menubar.php";
