@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>รายละเอียดรถ</title>
     <style>
-        .book-details{
+        .car-chiangrai{
             background-color:#fff;
         }
+       h3{
+        font-size: 24px;
+       }
     </style>
     <link rel="stylesheet" type="text/css" href="css/style_menuber.css">
 
@@ -22,7 +25,7 @@
             <a href="cars.php" class="btn btn-primary">กลับ</a>
             </div>
         </header>
-        <div class="book-details p-5 my-4">
+        <div class="car-chiangrai p-5 my-4">
             <?php
             include("db_conn.php");
             $id = $_GET['id'];
