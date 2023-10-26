@@ -18,7 +18,8 @@
             <a href="cars.php" class="btn btn-primary">กลับ</a>
             </div>
         </header>
-        <form action="cars_process.php" method="post">
+
+        <form action="cars_process.php" method="post" enctype="multipart/form-data">
             <?php 
             
             if (isset($_GET['id'])) {
@@ -32,6 +33,7 @@
                 <div class="form-elemnt my-4">
                 <select name="brand" class="form-control">
                     <option value="">ยี่ห้อรถ</option>
+                    <option value="Honda" <?php if($row["brand"]=="Honda"){echo "selected";} ?>>Honda</option>
                     <option value="Isuzu" <?php if($row["brand"]=="Isuzu"){echo "selected";} ?>>Isuzu</option>
                     <option value="Toyota" <?php if($row["brand"]=="Toyota"){echo "selected";} ?>>Toyota</option>
                     <option value="Suzuki" <?php if($row["brand"]=="Suzuki"){echo "selected";} ?>>Suzuki</option>
@@ -45,11 +47,11 @@
                 <input type="text" class="form-control" name="modelcar" placeholder="รุ่นรถ" value="<?php echo $row["modelcar"]; ?>">
             </div>
             <div class="form-elemnt my-4">
-                <input type="text" class="form-control" name="registercar" placeholder="รุ่นรถ" value="<?php echo $row["registercar"]; ?>">
+                <input type="text" class="form-control" name="registercar" placeholder="ทะเบียนรถ" value="<?php echo $row["registercar"]; ?>">
             </div>
             <div class="form-elemnt my-4">
                 <select name="typecar" class="form-control">
-                    <option value="">ยี่ห้อรถ</option>
+                    <option value="">ประเภทรถ</option>
                     <option value="รถเก๋ง" <?php if($row["typecar"]=="รถเก๋ง"){echo "selected";} ?>>รถเก๋ง</option>
                     <option value="รถยนต์" <?php if($row["typecar"]=="รถยนต์"){echo "selected";} ?>>รถยนต์</option>
                     <option value="รถตู้" <?php if($row["typecar"]=="รถตู้"){echo "selected";} ?>>รถตู้</option>
@@ -65,10 +67,33 @@
             <div class="form-elemnt my-4">
                 <input type="text" class="form-control" name="price" placeholder="ราคาต่อวัน" value="<?php echo $row["price"]; ?>">
             </div>
+
+           
+
+             <div class="form-elemnt my-4">
+                <label for="image" class="form-label"></label>
+                <input type="file" class="form-control" id="image" name="image" placeholder="รูปภาพ">
+                <input type="hidden" name="old_image" value="<?php echo $row['image']; ?>">
+        
+    </div>
+
+            <?php 
+            if(isset($row['image'])){
+                if(!empty($row['image'])){
+                    echo '<img src="image/'.$row['image'].'" />';
+                }
+            }
+           
+
+            ?>
+           
+
+            
             <input type="hidden" value="<?php echo $id; ?>" name="id">
             <div class="form-element my-4">
                 <input type="submit" name="edit" value="แก้ไขข้อมูลรถ" class="btn btn-primary">
             </div>
+           
                 <?php
             }else{
                 echo "<h3>ไม่มีข้อมูลรถ</h3>";

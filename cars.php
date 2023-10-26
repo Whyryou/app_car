@@ -13,8 +13,14 @@
         padding:20px!important;
         }
     </style>
-    
+     <link rel="stylesheet" type="text/css" href="css/style_menuber.css">
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
 </head>
+
+
 <body>
 
     <div class="container my-4">
@@ -70,6 +76,7 @@
                 <th>รุ่นรถ</th>
                 <th>ทะเบียนรถ</th>
                 <th>ประเภทรถ</th>
+                <th>รูปภาพ</th>
                 <th>ราคาเช่าต่อวัน</th>
             </tr>
         </thead>
@@ -87,11 +94,23 @@
                 <td><?php echo $data['modelcar']; ?></td>
                 <td><?php echo $data['registercar']; ?></td>
                 <td><?php echo $data['typecar']; ?></td>
+
+                 <td>  
+                    <?php 
+                        if(isset($data['image'])){
+                            if(!empty($data['image'])){
+                                echo '<img src="image/'.$data['image'].'" width="100" />';
+                }
+            }
+            ?>
+            </td>
+
                 <td><?php echo $data['price']; ?></td>
+                
                 <td>
                     <a href="cars_view.php?id=<?php echo $data['id']; ?>" class="btn btn-info">รายละเอียด</a>
                     <a href="cars_edit.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">แก้ไข</a>
-                    <a href="cars_delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger">ลบข้อมูล</a>
+                    <a href="cars_delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger" onclick="return confirm('คุณแน่ใจหรือว่าต้องการลบข้อมูลนี้?')">ลบข้อมูล</a>
                 </td>
             </tr>
             <?php
@@ -102,4 +121,3 @@
     </div>
 </body>
 </html>
-<?php include "menubar.php";

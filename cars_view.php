@@ -48,7 +48,15 @@
                  <p><?php echo $row["capacity"]; ?></p>
                  <h3>ราคาเช่าต่อวัน(บาท):</h3>
                  <p><?php echo $row["price"]; ?></p>
-                
+                 <h3>รูปภาพ:</h3>
+                 <p><?php echo $row["image"]; ?></p>
+                   <?php 
+                        if(isset($row['image'])){
+                            if(!empty($row['image'])){
+                                echo '<img src="image/'.$row['image'].'" />';
+                }
+            }
+            ?>
                  <?php
                 }
             }

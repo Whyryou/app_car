@@ -11,10 +11,10 @@
      		<p class="error"><?php echo $_GET['error']; ?></p>
      	<?php } ?>
      	<label>ชื่อผู้ใช้งาน</label>
-     	<input type="text" name="uname" placeholder="ชื่อผู้ใช้งาน"><br>
+     	<input type="text" name="uname" placeholder=""><br>
 
      	<label>รหัสผ่าน</label>
-     	<input type="password" name="password" placeholder="รหัสผ่าน"><br>
+     	<input type="password" name="password" placeholder=""><br>
 
      	<button type="submit">เข้าสู่ระบบ</button>
           <a href="signup.php" class="ca">สร้างบัญชีใหม่</a>

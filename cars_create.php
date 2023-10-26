@@ -18,8 +18,10 @@
             <a href="cars.php" class="btn btn-primary">กลับ</a>
             </div>
         </header>
-        
-        <form action="cars_process.php" method="post">
+
+       
+        <form action="cars_process.php" method="post" enctype="multipart/form-data" onsubmit="return checkEmpty()">
+
         <div class="form-elemnt my-4">
                 <select name="brand" class="form-control">
                 <i class="bx bx-chevron-down icon"></i>
@@ -33,6 +35,8 @@
                     <option value="Mazda">Mazda</option>
                     <option value="Ford">Ford</option>
                 </select>
+               
+
             </div>
             <div class="form-elemnt my-4">
                 <input type="text" class="form-control" name="modelcar" placeholder="รุ่นรถ">
@@ -59,12 +63,36 @@
             <div class="form-elemnt my-4">
                 <input type="text" class="form-control" name="price" placeholder="ราคาเช่าต่อวัน(บาท)">
             </div>
+                        
+            <div class="form-elemnt my-4">
+                <input type="file" class="form-control" name="image" placeholder="รูปภาพ" id="">
+            </div>
+
             <div class="form-element my-4">
                 <input type="submit" name="create" value="บันทึก" class="btn btn-primary">
             </div>
+           
         </form>
-        
+       
         
     </div>
+    <script>
+        function checkEmpty() {
+            var brand = document.getElementsByName('brand')[0].value;
+            var modelcar = document.getElementsByName('modelcar')[0].value;
+            var registercar = document.getElementsByName('registercar')[0].value;
+            var typecar = document.getElementsByName('typecar')[0].value;
+            var colorcar = document.getElementsByName('colorcar')[0].value;
+            var capacity = document.getElementsByName('capacity')[0].value;
+            var price = document.getElementsByName('price')[0].value;
+            var image = document.getElementsByName('image')[0].value;
+
+            if (brand === "" || modelcar === "" || registercar === "" || typecar === "" || colorcar === "" || capacity === "" || price === "" || image === "") {
+                alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>

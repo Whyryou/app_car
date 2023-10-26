@@ -22,7 +22,7 @@
      <nav>
       <div class="logo">
         <i class="bx bx-menu menu-icon"></i>
-        <span class="logo-name">เช่ารถเชียงราย</span>
+        <span class="logo-name">ข้อมูลรถ</span>
       </div>
 
       <div class="sidebar">

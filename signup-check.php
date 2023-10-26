@@ -48,14 +48,14 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 		// hashing the password
         $pass = md5($pass);
 
-	    $sql = "SELECT * FROM users WHERE user_name='$uname' ";
+	    $sql = "SELECT * FROM useradmin WHERE user_name='$uname' ";
 		$result = mysqli_query($conn, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
 			header("Location: signup.php?error=ชื่อผู้ใช้งานถูกใช้ไปแล้ว ลองใช้ชื่อผู้ใช้อื่น&$user_data");
 	        exit();
 		}else {
-           $sql2 = "INSERT INTO users(user_name, password, name) VALUES('$uname', '$pass', '$name')";
+           $sql2 = "INSERT INTO useradmin(user_name, password, name) VALUES('$uname', '$pass', '$name')";
            $result2 = mysqli_query($conn, $sql2);
            if ($result2) {
            	 header("Location: signup.php?success=บัญชีของคุณถูกสร้างขึ้นเรียบร้อยแล้ว");
