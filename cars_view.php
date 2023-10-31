@@ -14,7 +14,8 @@
         font-size: 24px;
        }
     </style>
-    <link rel="stylesheet" type="text/css" href="css/style_menuber.css">
+    <link rel="stylesheet" type="text/css" href="css/styles_menubar.css">
+
 
 </head>
 <body>
@@ -53,7 +54,7 @@
                    <?php 
                         if(isset($row['image'])){
                             if(!empty($row['image'])){
-                                echo '<img src="image/'.$row['image'].'" />';
+                                echo '<img src="image/'.$row['image'].'"  width="200"/>';
                 }
             }
             ?>

@@ -9,7 +9,7 @@
      	<h2>เข้าสู่ระบบ</h2>
      	<?php if (isset($_GET['error'])) { ?>
      		<p class="error"><?php echo $_GET['error']; ?></p>
-     	<?php } ?>
+     	<?php  } ?>
      	<label>ชื่อผู้ใช้งาน</label>
      	<input type="text" name="uname" placeholder=""><br>
 

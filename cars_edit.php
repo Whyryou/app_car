@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>แก้ไขข้อมูลรถ</title>
 
-    <link rel="stylesheet" type="text/css" href="css/style_menuber.css">
+   <link rel="stylesheet" type="text/css" href="css/styles_menubar.css">
 
 </head>
 <body>
@@ -80,7 +80,7 @@
             <?php 
             if(isset($row['image'])){
                 if(!empty($row['image'])){
-                    echo '<img src="image/'.$row['image'].'" />';
+                    echo '<img src="image/'.$row['image'].'"  width="200" />';
                 }
             }
            
