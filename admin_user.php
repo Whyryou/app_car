@@ -1,7 +1,6 @@
 <?php
 include "db_conn.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +11,7 @@ include "db_conn.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="css/styles_meunbar.css">
-    <title>ข้อมูลลูกค้า</title>
+    <title>ข้อมูลพนักงาน</title>
      <style>
         table  td, table th{
         vertical-align:middle;
@@ -31,9 +30,9 @@ include "db_conn.php";
             <div class="list-group list-group-flush my-3">
                 <a href="dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-tachometer-alt me-2"></i>แดชบอร์ด</a>
-                <a href="user_customer.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                <a href="user_customer.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-solid fa-user me-2"></i>ลูกค้า</a>
-                <a href="admin_user.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="admin_user.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-solid fa-user-tie me-2"></i>พนักงาน</a>
                 <a href="cars.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-solid fa-car me-2"></i>รถ</a>
@@ -54,7 +53,7 @@ include "db_conn.php";
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">ข้อมูลลูกค้า</h2>
+                    <h2 class="fs-2 m-0">ข้อมูลพนักงาน</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -72,15 +71,15 @@ include "db_conn.php";
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="profile.php">โปรไฟล์</a></li>
+                                
                                 <li><a class="dropdown-item" href="logout.php">ออกจากระบบ</a></li>
-                               
                             </ul>
                         </li>
                     </ul>
                 </div>
             </nav>
 
-        <?php /* ตารางจัดการลูกค้า */?>
+             <?php /* ตารางจัดการลูกค้า */?>
             <div class="container-fluid px-4">
                 <?php
     if (isset($_GET["msg"])) {
@@ -94,7 +93,7 @@ include "db_conn.php";
         <div class="row my-2">
         
         <div>
-                <a href="usercus_create.php" class="btn btn-primary my-4">เพิ่มข้อมูลลูกค้า</a>
+                <a href="admin_create.php" class="btn btn-primary my-4">เพิ่มข้อมูลพนักงาน</a>
 
             </div>
             
@@ -103,8 +102,8 @@ include "db_conn.php";
                    <thead>
             <tr>
                 <th>ลำดับ</th>
-                <th>ชื่อ</th>
-                <th>นามสกุล</th>
+                <th>ชื่อ-นามสกุล</th>
+                <th>ชื่อผู้ใช้งาน</th>
                 <th>อีเมล</th>
                 <th>สถานะ</th>
                 <th>จัดการ</th>
@@ -114,23 +113,23 @@ include "db_conn.php";
         
         <?php
        
-        $sqlSelect = "SELECT * FROM usercustomer";
+        $sqlSelect = "SELECT * FROM useradmin";
         $result = mysqli_query($conn,$sqlSelect);
         while($data = mysqli_fetch_array($result)){
             ?>
             <tr>
                 <td><?php echo $data['id']; ?></td>
                 <td><?php echo $data['name']; ?></td>
-                <td><?php echo $data['lastname']; ?></td>
+                <td><?php echo $data['user_name']; ?></td>
                 <td><?php echo $data['email']; ?></td>
                 <td><?php echo $data['status']; ?></td>
                 
             </td>
 
                 <td>
-                    <a href="usercus_view.php?id=<?php echo $data['id']; ?>" class="btn btn-info">ดูข้อมูลลูกค้า</a>
-                    <a href="usercus_edit.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">แก้ไข</a>
-                    <a href="usercus_delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger" onclick="return confirm('คุณแน่ใจหรือว่าต้องการลบข้อมูลนี้?')">ลบข้อมูล</a>
+                    <a href="admin_view.php?id=<?php echo $data['id']; ?>" class="btn btn-info">ดูข้อมูลลูกค้า</a>
+                    <a href="admin_edit.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">แก้ไข</a>
+                    <a href="admin_delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger" onclick="return confirm('คุณแน่ใจหรือว่าต้องการลบข้อมูลนี้?')">ลบข้อมูล</a>
                 </td>
             </tr>
             <?php
@@ -158,9 +157,6 @@ include "db_conn.php";
             el.classList.toggle("toggled");
         };
     </script>
-
-    
-    
 </body>
 
 </html>

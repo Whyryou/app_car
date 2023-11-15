@@ -21,18 +21,18 @@
                 <a href="dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-tachometer-alt me-2"></i>แดชบอร์ด</a>
                 <a href="user_customer.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-project-diagram me-2"></i>ลูกค้า</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-chart-line me-2"></i>พนักงาน</a>
+                        class="fas fa-solid fa-user me-2"></i>ลูกค้า</a>
+                <a href="admin_user.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-solid fa-user-tie me-2"></i>พนักงาน</a>
                 <a href="cars.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-paperclip me-2"></i>รถ</a>
+                        class="fas fa-solid fa-car me-2"></i>รถ</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-shopping-cart me-2"></i>เช่ารถ</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-gift me-2"></i>คืนรถ</a>
+                        class="fas fa-shopping-cart me-2"></i>คืนรถ</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="fas fa-comment-dots me-2"></i>ประวัติการเช่า-คืน</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                        class="fas fa-solid fa-book me-2"></i>ประวัติการเช่า-คืน</a>
+                <a href="logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>ออกจากระบบ</a>
             </div>
         </div>
@@ -60,9 +60,9 @@
                                 <i class="fas fa-user me-2"></i>แอดมิน
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
+                                <li><a class="dropdown-item" href="profile.php">โปรไฟล์</a></li>
                                
-                                <li><a class="dropdown-item" href="#">ออกจากระบบ</a></li>
+                                <li><a class="dropdown-item" href="logout.php">ออกจากระบบ</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -77,7 +77,7 @@
                                 <h3 class="fs-2">720</h3>
                                 <p class="fs-5">ผู้ใช้งานทั้งหมด</p>
                             </div>
-                            <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i class="fas fa-user-circle fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@
                                 <p class="fs-5">รถทั้งหมด</p>
                             </div>
                             <i
-                                class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                                class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
 
@@ -98,7 +98,7 @@
                                 <h3 class="fs-2">3899</h3>
                                 <p class="fs-5">รายการอนุมัติ</p>
                             </div>
-                            <i class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i class="fas fa-cart-arrow-down fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
 
@@ -108,7 +108,7 @@
                                 <h3 class="fs-2">%25</h3>
                                 <p class="fs-5">รายการรอรับคืน</p>
                             </div>
-                            <i class="fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i class="fas fa-calculator fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
                 </div>

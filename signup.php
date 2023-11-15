@@ -40,6 +40,19 @@
                       placeholder=""><br>
           <?php }?>
 
+          <?php /* email เพิ่มใหม่ */ ?>
+           <label>อีเมล</label>
+          <?php if (isset($_GET['email'])) { ?>
+               <input type="email" 
+                      name="email" 
+                      placeholder=""
+                      value="<?php echo $_GET['email']; ?>"><br>
+          <?php }else{ ?>
+               <input type="text" 
+                      name="email" 
+                      placeholder=""><br>
+          <?php }?>
+
 
      	<label>รหัสผ่าน</label>
      	<input type="password" 

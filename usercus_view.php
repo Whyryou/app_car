@@ -8,14 +8,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>ข้อมูลลูกค้า</title>
-    <style>
-        .car-chiangrai {
-            background-color: #fff;
+     <style>
+        .car-chiangrai{
+            background-color:#fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
-
-        h3 {
-            font-size: 24px;
-        }
+       h3{
+        font-size: 24px;
+        margin-top: 20px;
+       }
+       img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 10px;
+       }
     </style>
     <link rel="stylesheet" type="text/css" href="css/style_menuber.css">
 

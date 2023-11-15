@@ -1,13 +1,7 @@
 <?php
 include('db_conn.php');
-if (isset($_POST["create"])) {
 
-     if(empty($_POST["brand"]) || empty($_POST["modelcar"]) || empty($_POST["registercar"]) || empty($_POST["typecar"]) || empty($_POST["colorcar"]) || empty($_POST["capacity"]) || empty($_POST["price"]) || empty($_FILES['image']['name'])){
-        // กรณีพบค่าว่าง แสดงข้อความแจ้งเตือน
-        echo "กรุณากรอกข้อมูลให้ครบทุกช่อง";
-        exit();
-    }
-
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["create"])) {
     $brand = mysqli_real_escape_string($conn, $_POST["brand"]);
     $modelcar = mysqli_real_escape_string($conn, $_POST["modelcar"]);
     $registercar = mysqli_real_escape_string($conn, $_POST["registercar"]);
@@ -16,29 +10,76 @@ if (isset($_POST["create"])) {
     $capacity = mysqli_real_escape_string($conn, $_POST["capacity"]);
     $price = mysqli_real_escape_string($conn, $_POST["price"]);
 
-    if(!empty($_FILES['image']['name'])){
-        $filename = md5($_FILES['image']['name'].time());
-        $ext = explode('.', $_FILES['image']['name']);
-        $dest = __DIR__.DIRECTORY_SEPARATOR.'image'.DIRECTORY_SEPARATOR.$filename.'.'.$ext[1];
-        if(!copy($_FILES['image']['tmp_name'],$dest)){
-            echo 'Upload Error';
-            exit();
+   
+    // ตรวจสอบว่าไฟล์มีอยู่แล้วหรือไม่
+    if (!empty($_FILES['image']['name']) && !empty($_FILES['image_1']['name']) && !empty($_FILES['image_2']['name'])) {
+        $target_dir = "image/";  // โฟลเดอร์ที่เก็บไฟล์
+
+        $target_file_1 = $target_dir . basename($_FILES["image"]["name"]);
+        $target_file_2 = $target_dir . basename($_FILES["image_1"]["name"]);
+        $target_file_3 = $target_dir . basename($_FILES["image_2"]["name"]);
+
+        // ตรวจสอบขนาดของไฟล์ และกำหนดไฟล์ที่ยอมรับได้
+        $uploadOk = 1;
+        $allowedFormats = array('jpg', 'jpeg', 'png', 'gif');
+
+        foreach ([$_FILES['image'], $_FILES['image_1'], $_FILES['image_2']] as $file) {
+            $check = getimagesize($file["tmp_name"]);
+            $imageFileType = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
+
+            if ($check === false) {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
+
+            if (file_exists($target_dir . $file["name"])) {
+                echo "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
+
+            if ($file["size"] > 500000) {
+                echo "Sorry, your file is too large.";
+                $uploadOk = 0;
+            }
+
+            if (!in_array($imageFileType, $allowedFormats)) {
+                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                $uploadOk = 0;
+            }
         }
-        $image = $filename.'.'.$ext[1];
-    }
-    //insert data
-    $sqlInsert = "INSERT INTO car(brand , modelcar , registercar , typecar , colorcar , capacity , price , image) VALUES (' $brand','$modelcar','$registercar', '$typecar' , ' $colorcar' , '$capacity' , '$price' ,'$image')";
-    if(mysqli_query($conn,$sqlInsert)){
-        session_start();
-        $_SESSION["create"] = "เพิ่มข้อมูลรถสำเร็จ";
-        header("Location:cars.php");
-    }else{
-        die("เกิดข้อผิดพลาดบางอย่าง");
+
+        // ตรวจสอบว่า $uploadOk มีค่าเป็น 0 หรือไม่ หากเกิดข้อผิดพลาด ไม่ทำการอัปโหลดไฟล์
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+        } else {
+            // ถ้าทุกรายการตรวจสอบผ่าน ให้ทำการอัปโหลดไฟล์
+            if (
+                move_uploaded_file($_FILES["image"]["tmp_name"], $target_file_1) &&
+                move_uploaded_file($_FILES["image_1"]["tmp_name"], $target_file_2) &&
+                move_uploaded_file($_FILES["image_2"]["tmp_name"], $target_file_3)
+            ) {
+                //insert data
+                $sqlInsert = "INSERT INTO car(brand , modelcar , registercar , typecar , colorcar , capacity , price , image , image_1 , image_2) VALUES ('$brand','$modelcar','$registercar', '$typecar' , ' $colorcar' , '$capacity' , '$price' ,'$target_file_1' ,'$target_file_2' , '$target_file_3')";
+
+                if (mysqli_query($conn, $sqlInsert)) {
+                    session_start();
+                    $_SESSION["create"] = "เพิ่มข้อมูลรถสำเร็จ";
+                    header("Location:cars.php");
+                } else {
+                    die("เกิดข้อผิดพลาดบางอย่าง");
+                }
+            } else {
+                echo "Sorry, there was an error uploading your files.";
+            }
+        }
+    } else {
+        echo "กรุณาเลือกไฟล์รูปภาพทั้ง 3 รูป";
     }
 }
 
 
-if (isset($_POST["edit"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["edit"])) {
+    $id = mysqli_real_escape_string($conn, $_POST["id"]);
     $brand = mysqli_real_escape_string($conn, $_POST["brand"]);
     $modelcar = mysqli_real_escape_string($conn, $_POST["modelcar"]);
     $registercar = mysqli_real_escape_string($conn, $_POST["registercar"]);
@@ -47,35 +88,44 @@ if (isset($_POST["edit"])) {
     $capacity = mysqli_real_escape_string($conn, $_POST["capacity"]);
     $price = mysqli_real_escape_string($conn, $_POST["price"]);
 
-    
+    // Check if new images are provided
+    $target_dir = "image/";
+
     if (!empty($_FILES['image']['name'])) {
-    $filename = md5($_FILES['image']['name'] . time());
-    $ext = explode('.', $_FILES['image']['name']);
-    $dest = __DIR__ . DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR . $filename . '.' . $ext[1];
-    if (!copy($_FILES['image']['tmp_name'], $dest)) {
-        echo 'Upload Error';
-        exit();
-    }
-    $image = $filename . '.' . $ext[1];
-    } 
- if (!empty($_FILES['image']['name'])) {
-        // โค้ดสำหรับการอัปโหลดไฟล์รูปภาพใหม่
-        // ...
+        $target_file_1 = $target_dir . basename($_FILES["image"]["name"]);
+        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file_1);
     } else {
-        // ในกรณีที่ไม่ได้อัปโหลดรูปภาพใหม่ ให้ใช้ค่ารูปภาพเดิม
-        $image = mysqli_real_escape_string($conn, $_POST["old_image"]); // ใช้ค่ารูปภาพเดิมที่เก็บไว้
+        // If no new image is provided, use the existing image
+        $target_file_1 = $_POST['old_image'];
     }
 
+    if (!empty($_FILES['image_1']['name'])) {
+        $target_file_2 = $target_dir . basename($_FILES["image_1"]["name"]);
+        move_uploaded_file($_FILES["image_1"]["tmp_name"], $target_file_2);
+    } else {
+        $target_file_2 = $_POST['old_image_1'];
+    }
 
-    $id = mysqli_real_escape_string($conn, $_POST["id"]);
-    $sqlUpdate = "UPDATE car SET brand = '$brand', modelcar = '$modelcar', registercar = '$registercar', typecar = '$typecar', colorcar = '$colorcar', capacity = '$capacity', price = '$price' , image = '$image' WHERE id='$id'";
-    if(mysqli_query($conn,$sqlUpdate)){
+    if (!empty($_FILES['image_2']['name'])) {
+        $target_file_3 = $target_dir . basename($_FILES["image_2"]["name"]);
+        move_uploaded_file($_FILES["image_2"]["tmp_name"], $target_file_3);
+    } else {
+        $target_file_3 = $_POST['old_image_2'];
+    }
+
+    // Update the car information in the database
+    $sql = "UPDATE car SET brand='$brand', modelcar='$modelcar', registercar='$registercar', typecar='$typecar', colorcar='$colorcar', capacity='$capacity', price='$price', image='$target_file_1', image_1='$target_file_2', image_2='$target_file_3' WHERE id=$id";
+
+    if (mysqli_query($conn, $sql)) {
         session_start();
-        $_SESSION["update"] = "อัปเดตข้อมูลรถสำเร็จ";
-        header("Location:cars.php");
-    }else{
-        die("เกิดข้อผิดพลาดบางอย่าง");
+        $_SESSION["edit"] = "แก้ไขข้อมูลรถสำเร็จ";
+        header("Location: cars.php");
+        exit();
+    } else {
+        $error_message = "เกิดข้อผิดพลาดในการแก้ไขข้อมูลรถ: " . mysqli_error($conn);
+        echo $error_message;
     }
 }
-?>
 
+
+?>

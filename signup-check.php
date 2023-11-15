@@ -3,7 +3,7 @@ session_start();
 include "db_conn.php";
 
 if (isset($_POST['uname']) && isset($_POST['password'])
-    && isset($_POST['name']) && isset($_POST['re_password'])) {
+    && isset($_POST['name']) && isset($_POST['re_password']) && isset($_POST['email'])) {
 
 	function validate($data){
        $data = trim($data);
@@ -17,7 +17,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 
 	$re_pass = validate($_POST['re_password']);
 	$name = validate($_POST['name']);
-
+	$email = validate($_POST['email']);
 	$user_data = 'uname='. $uname. '&name='. $name;
 
 
@@ -29,7 +29,11 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 	    exit();
 	}
 	else if(empty($re_pass)){
-        header("Location: signup.php?error=กรุณาป้อนรหัสผ่านอีกครั้ง&$user_data");
+        header("Location: signup.php?error=กรุณายืนยันรหัสผ่านอีกครั้ง&$user_data");
+	    exit();
+	}
+	else if(empty($email)){
+        header("Location: signup.php?error=กรุณาป้อนอีเมล&$user_data");
 	    exit();
 	}
 
@@ -48,14 +52,21 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 		// hashing the password
         $pass = md5($pass);
 
-	    $sql = "SELECT * FROM useradmin WHERE user_name='$uname' ";
+	    $sql = "SELECT * FROM useradmin WHERE user_name='$uname' OR email='$email'  ";
 		$result = mysqli_query($conn, $sql);
 
 		if (mysqli_num_rows($result) > 0) {
-			header("Location: signup.php?error=ชื่อผู้ใช้งานถูกใช้ไปแล้ว ลองใช้ชื่อผู้ใช้อื่น&$user_data");
-	        exit();
-		}else {
-           $sql2 = "INSERT INTO useradmin(user_name, password, name) VALUES('$uname', '$pass', '$name')";
+			 $row = mysqli_fetch_assoc($result);
+        if ($row['user_name'] === $uname) {
+            header("Location: signup.php?error=ชื่อผู้ใช้ถูกใช้ไปแล้ว&$user_data");
+            exit();
+        } else if ($row['email'] === $email) {
+            header("Location: signup.php?error=อีเมลถูกใช้ไปแล้ว&$user_data");
+            exit();
+        }
+    } 
+		else {
+           $sql2 = "INSERT INTO useradmin(user_name, password, name , email , status) VALUES('$uname', '$pass', '$name', '$email', '$status')";
            $result2 = mysqli_query($conn, $sql2);
            if ($result2) {
            	 header("Location: signup.php?success=บัญชีของคุณถูกสร้างขึ้นเรียบร้อยแล้ว");
@@ -71,3 +82,4 @@ if (isset($_POST['uname']) && isset($_POST['password'])
 	header("Location: signup.php");
 	exit();
 }
+
