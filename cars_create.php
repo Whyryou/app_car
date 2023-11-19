@@ -20,6 +20,18 @@
       <div class="container d-flex justify-content-center">
          <form action="cars_process.php" method="post" style="width:50vw; min-width:300px;" enctype="multipart/form-data" onsubmit="return checkEmpty()">
             <div class="row mb-3">
+                <div class="col">
+                  <label class="form-label">ประเภทรถ :</label>
+                   <select name="typecar" class="form-control" required>
+                    <i class="bx bx-chevron-down icon"></i>
+                    <option value="">ประเภทรถ</option>
+                    <option value="รถเก๋ง">รถเก๋ง</option>
+                    <option value="รถยนต์">รถยนต์</option>
+                    <option value="รถตู้">รถตู้</option>
+                    <option value="รถมอเตอร์ไซต์">รถมอเตอร์ไซต์</option>
+                </select>
+               </div>
+               
                <div class="col">
                   <label class="form-label">ยี่ห้อรถ :</label>
                   <select name="brand" class="form-control" required>
@@ -36,30 +48,21 @@
                 </select>
                </div>
 
-               <div class="col">
-                  <label class="form-label">รุ่นรถ :</label>
-                  <input type="text" class="form-control" name="modelcar" placeholder="รุ่นรถ"  required>
-               </div>
+              
 
                 
             </div>
              <div class="row mb-3">
                 <div class="col">
+                  <label class="form-label">รุ่นรถ :</label>
+                  <input type="text" class="form-control" name="modelcar" placeholder="รุ่นรถ"  required>
+               </div>
+
+                <div class="col">
                   <label class="form-label">ทะเบียนรถ :</label>
                   <input type="text" class="form-control" name="registercar" placeholder="ทะเบียนรถ"  required>
                </div>
 
-               <div class="col">
-                  <label class="form-label">ประเภทรถ :</label>
-                   <select name="typecar" class="form-control" required>
-                    <i class="bx bx-chevron-down icon"></i>
-                    <option value="">ประเภทรถ</option>
-                    <option value="รถเก๋ง">รถเก๋ง</option>
-                    <option value="รถยนต์">รถยนต์</option>
-                    <option value="รถตู้">รถตู้</option>
-                    <option value="รถมอเตอร์ไซต์">รถมอเตอร์ไซต์</option>
-                </select>
-               </div>
 
             </div>
 

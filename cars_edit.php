@@ -29,6 +29,18 @@
                 ?>
                 
                <div class="row mb-3">
+                 <div class="col">
+                  <label class="form-label">ประเภทรถ :</label>
+                   <select name="typecar" class="form-control" required>
+                    <i class="bx bx-chevron-down icon"></i>
+                    <option value="">ประเภทรถ</option>
+                    <option value="รถเก๋ง" <?php if($row["typecar"]=="รถเก๋ง"){echo "selected";} ?>>รถเก๋ง </option>
+                    <option value="รถยนต์" <?php if($row["typecar"]=="รถยนต์"){echo "selected";} ?>>รถยนต์ </option>
+                    <option value="รถตู้" <?php if($row["typecar"]=="รถตู้"){echo "selected";} ?>>รถตู้ </option>
+                    <option value="รถมอเตอร์ไซต์" <?php if($row["typecar"]=="รถมอเตอร์ไซต์"){echo "selected";} ?>>รถมอเตอร์ไซต์</option>
+                </select>
+               </div>
+
                <div class="col">
                   <label class="form-label">ยี่ห้อรถ :</label>
                   <select name="brand" class="form-control" required>
@@ -45,30 +57,22 @@
                 </select>
                </div>
 
-               <div class="col">
+              
+
+                
+            </div>
+             <div class="col">
                   <label class="form-label">รุ่นรถ :</label>
                   <input type="text" class="form-control" name="modelcar" placeholder="รุ่นรถ" value="<?php echo $row["modelcar"]; ?>" required>
                </div>
 
-                
-            </div>
              <div class="row mb-3">
                 <div class="col">
                   <label class="form-label">ทะเบียนรถ :</label>
                   <input type="text" class="form-control" name="registercar" placeholder="ทะเบียนรถ" value="<?php echo $row["registercar"]; ?>" required>
                </div>
 
-               <div class="col">
-                  <label class="form-label">ประเภทรถ :</label>
-                   <select name="typecar" class="form-control" required>
-                    <i class="bx bx-chevron-down icon"></i>
-                    <option value="">ประเภทรถ</option>
-                    <option value="รถเก๋ง" <?php if($row["typecar"]=="รถเก๋ง"){echo "selected";} ?>>รถเก๋ง </option>
-                    <option value="รถยนต์" <?php if($row["typecar"]=="รถยนต์"){echo "selected";} ?>>รถยนต์ </option>
-                    <option value="รถตู้" <?php if($row["typecar"]=="รถตู้"){echo "selected";} ?>>รถตู้ </option>
-                    <option value="รถมอเตอร์ไซต์" <?php if($row["typecar"]=="รถมอเตอร์ไซต์"){echo "selected";} ?>>รถมอเตอร์ไซต์</option>
-                </select>
-               </div>
+              
 
             </div>
 
