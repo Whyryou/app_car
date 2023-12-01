@@ -33,7 +33,7 @@
                         class="fas fa-solid fa-user-tie me-2"></i>พนักงาน</a>
                 <a href="cars.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-solid fa-car me-2"></i>รถ</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="rentcar.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-shopping-cart me-2"></i>เช่ารถ</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-shopping-cart me-2"></i>คืนรถ</a>

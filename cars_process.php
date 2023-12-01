@@ -28,29 +28,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["create"])) {
             $imageFileType = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
 
             if ($check === false) {
-                echo "File is not an image.";
+                echo "ไม่ใช่ไฟล์รูปภาพ";
                 $uploadOk = 0;
             }
 
             if (file_exists($target_dir . $file["name"])) {
-                echo "Sorry, file already exists.";
+                echo "ขออภัยมีไฟล์อยู่แล้ว";
                 $uploadOk = 0;
             }
 
             if ($file["size"] > 500000) {
-                echo "Sorry, your file is too large.";
+                echo "ขอภัยไฟล์ของคุณใหญ่เกินไป";
                 $uploadOk = 0;
             }
 
             if (!in_array($imageFileType, $allowedFormats)) {
-                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                echo "ขออภัยอนุญาตแค่ไฟล์ JPG, JPEG, PNG & GIF เท่านั้น";
                 $uploadOk = 0;
             }
         }
 
         // ตรวจสอบว่า $uploadOk มีค่าเป็น 0 หรือไม่ หากเกิดข้อผิดพลาด ไม่ทำการอัปโหลดไฟล์
         if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
+            echo "ขออภัยไฟล์ของคุณไม่ได้อัปโหลด";
         } else {
             // ถ้าทุกรายการตรวจสอบผ่าน ให้ทำการอัปโหลดไฟล์
             if (
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["create"])) {
                     die("เกิดข้อผิดพลาดบางอย่าง");
                 }
             } else {
-                echo "Sorry, there was an error uploading your files.";
+                echo "ขออภัย เกิดข้อผิดพลาดในการอัปโหลดไฟล์ของคุณ";
             }
         }
     } else {

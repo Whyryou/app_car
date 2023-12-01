@@ -1,6 +1,3 @@
-<?php
-include "db_conn.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +8,7 @@ include "db_conn.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="css/styles_meunbar.css">
-    <title>ข้อมูลพนักงาน</title>
+    <title>ข้อมูลการเช่ารถ</title>
      <style>
         table  td, table th{
         vertical-align:middle;
@@ -32,11 +29,11 @@ include "db_conn.php";
                         class="fas fa-tachometer-alt me-2"></i>แดชบอร์ด</a>
                 <a href="user_customer.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-solid fa-user me-2"></i>ลูกค้า</a>
-                <a href="admin_user.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
+                <a href="admin_user.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-solid fa-user-tie me-2"></i>พนักงาน</a>
                 <a href="cars.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-solid fa-car me-2"></i>รถ</a>
-                <a href="rentcar.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="rentcar.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-shopping-cart me-2"></i>เช่ารถ</a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-shopping-cart me-2"></i>คืนรถ</a>
@@ -53,7 +50,7 @@ include "db_conn.php";
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">ข้อมูลพนักงาน</h2>
+                    <h2 class="fs-2 m-0">ข้อมูลการเช่ารถ</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -79,63 +76,68 @@ include "db_conn.php";
                 </div>
             </nav>
 
-             <?php /* ตารางจัดการลูกค้า */?>
             <div class="container-fluid px-4">
-                <?php
-    if (isset($_GET["msg"])) {
-      $msg = $_GET["msg"];
-      echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-      ' . $msg . '
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>';
-    }
-    ?>
-        <div class="row my-2">
-        
-        <div>
-                <a href="admin_create.php" class="btn btn-primary my-4">เพิ่มข้อมูลพนักงาน</a>
+                
+
+                <div class="row my-2">
+                    
+            <div>
+                <a href="cars_create.php" class="btn btn-primary my-4">เพิ่มการเช่า</a>
 
             </div>
             
             <div class="col">
                 <table class="table bg-white rounded shadow-sm  table-hover">
-                   <thead>
+                    <thead>
             <tr>
                 <th>ลำดับ</th>
-                <th>ชื่อ-นามสกุล</th>
-                <th>ชื่อผู้ใช้งาน</th>
-                <th>อีเมล</th>
-                <th>สถานะ</th>
+                <th>ยี่ห้อรถ</th>
+                <th>รุ่นรถ</th>
+                <th>ทะเบียนรถ</th>
+                <th>ราคาเช่าทั้งหมด</th>
+                <th>รายละเอียด</th>
                 <th>จัดการ</th>
             </tr>
         </thead>
         <tbody>
         
         <?php
-       
-        $sqlSelect = "SELECT * FROM useradmin";
+        include('db_conn.php');
+        $sqlSelect = "SELECT * FROM car";
         $result = mysqli_query($conn,$sqlSelect);
         while($data = mysqli_fetch_array($result)){
             ?>
             <tr>
                 <td><?php echo $data['id']; ?></td>
-                <td><?php echo $data['name']; ?></td>
-                <td><?php echo $data['user_name']; ?></td>
-                <td><?php echo $data['email']; ?></td>
-                <td><?php echo $data['status']; ?></td>
-                
-            </td>
+                <td><?php echo $data['brand']; ?></td>
+                <td><?php echo $data['modelcar']; ?></td>
+                <td><?php echo $data['registercar']; ?></td>
+                <td><?php echo $data['typecar']; ?></td>
 
                 <td>
-                    <a href="admin_view.php?id=<?php echo $data['id']; ?>" class="btn btn-info">ดูข้อมูลลูกค้า</a>
-                    <a href="admin_edit.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">แก้ไข</a>
-                    <a href="admin_delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger" onclick="return confirm('คุณแน่ใจหรือว่าต้องการลบข้อมูลนี้?')">ลบข้อมูล</a>
+        <?php
+        // Check if the image paths are not empty before displaying
+        if (!empty($data['image']) && !empty($data['image_1']) && !empty($data['image_2'])) {
+            echo '<img src="' . $data['image'] . '" width="100" alt="Image 1">';
+           
+        } else {
+            echo 'No images available';
+        }
+        ?>
+    </td>
+
+
+                <td><?php echo $data['price']; ?></td>
+                
+                <td>
+                    <a href="cars_view.php?id=<?php echo $data['id']; ?>" class="btn btn-info">รายละเอียด</a>
+                    <a href="cars_edit.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">แก้ไข</a>
+                    <a href="cars_delete.php?id=<?php echo $data['id']; ?>" class="btn btn-danger" onclick="return confirm('คุณแน่ใจหรือว่าต้องการลบข้อมูลนี้?')">ลบข้อมูล</a>
                 </td>
             </tr>
             <?php
         }
         ?>
-        </tbody>
         </tbody>
                            
                         </table>
@@ -157,6 +159,46 @@ include "db_conn.php";
             el.classList.toggle("toggled");
         };
     </script>
+
+     <?php
+        session_start();
+        if (isset($_SESSION["create"])) {
+        ?>
+        <div class="alert alert-success">
+            <?php 
+            echo $_SESSION["create"];
+            ?>
+        </div>
+        <?php
+        unset($_SESSION["create"]);
+        }
+        ?>
+         <?php
+        if (isset($_SESSION["update"])) {
+        ?>
+        <div class="alert alert-success">
+            <?php 
+            echo $_SESSION["update"];
+            ?>
+        </div>
+        <?php
+        unset($_SESSION["update"]);
+        }
+        ?>
+        <?php
+        if (isset($_SESSION["delete"])) {
+        ?>
+        <div class="alert alert-success">
+            <?php 
+            echo $_SESSION["delete"];
+            ?>
+        </div>
+        <?php
+        unset($_SESSION["delete"]);
+        }
+        ?>
+        
+       
 </body>
 
 </html>
